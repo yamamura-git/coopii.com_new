@@ -1,0 +1,7 @@
+{
+	"require": {
+		"volnix/csrf": "~1.0",
+		"eftec/bladeone": "^3.52",
+		"phpmailer/phpmailer": "^6.6"
+	}
+}

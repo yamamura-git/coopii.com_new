@@ -1,0 +1,187 @@
+@import '_include.scss';
+$border_color: #ddd;
+
+.nav-tabs {
+	.nav-item {
+		&:last-child .nav-link {
+			border-right: 1px solid $border_color;
+		}
+	}
+	.nav-link {
+		height: 100%;
+		border-top: 1px solid $border_color;
+		border-left: 1px solid $border_color;
+		border-bottom: none;
+		color: #aaa;
+		border-radius: 0;
+		&.active, .nav-tabs .nav-item.show .nav-link, &:hover {
+			position: relative;
+			border-left: 1px solid $border_color;
+			font-weight: bold;
+			&:before {
+				content: '';
+				width: 100%;
+				height: 4px;
+				position: absolute;
+				top: -1px;
+				left: 0;
+				background-color: $base_color;
+			}
+		}
+	}
+}
+
+.tab-content {
+	padding: 20px;
+	border: 1px solid #ddd;
+}
+.detail_wrap {
+	.fxwb {
+		border-bottom: 1px solid #000;
+		margin-bottom: 0;
+		padding: 15px 0;
+		&:first-child {border-top: 1px solid #000;}
+	}
+	dd {margin-bottom: 0;}
+}
+
+.support_wrap {
+	h4 {
+		font-size: 16px;
+		border-bottom: 1px solid #000;
+		margin-bottom: 20px;
+	}
+	.fxwb {
+		margin-bottom: 20px;
+	}
+	.img {
+		background-color: #ddd;
+	}
+	.title {
+		font-weight: bold;
+	}
+}
+
+.flow_wrap {
+	.fxwb {
+		background-color: #ddd;
+		margin-bottom: 30px;
+		position: relative;
+		&:not(:last-child):after {
+			content: '';
+			width: 1px;
+			height: 30px;
+			border-right: 1px dotted #000;
+			position: absolute;
+			bottom: -30px;
+			left: 0;
+		}
+	}
+	.num {
+		background-color: #ccc;
+		text-align: center;
+		font-weight: bold;
+		padding: 10px;
+	}
+	.title {
+		font-weight: bold;
+		padding: 10px;
+		margin-bottom: 0;
+	}
+	.text {
+		padding: 10px;
+		margin-bottom: 0;
+	}
+}
+
+/* 〜768px：スマホ && 縦向き
+---------------------------- */
+@media screen and (max-width:768px) and (orientation: portrait) {
+	.nav-tabs {
+		.nav-item {
+			width: 50%;
+			&:nth-child(2) {
+				border-right: 1px solid $border_color;
+			}
+			button {
+				width: 100%;
+			}
+		}
+	}
+	.support_wrap {
+		.img {display: none;}
+	}
+
+	.flow_wrap {
+		.fxwb {
+			&:after {
+				right: 0;
+				margin: auto;
+			}
+		}
+		.title {
+			text-align: center;
+		}
+	}
+}
+
+/* 768px〜：タブレット
+------------------------------ */
+@media screen and (min-width:768px) {
+	.tab-content {
+		padding: 30px 40px;
+	}
+	.fxwb {
+		display: flex;
+		justify-content: space-between;
+	}
+	.detail_wrap {
+		dt {
+			width: 20%;
+		}
+		dd {
+			width: 80%;
+		}
+	}
+
+	.support_wrap {
+		.img {width: 15%;}
+		.text_box {
+			width: 80%;
+		}
+	}
+
+	.flow_wrap {
+		.fxwb {
+			position: relative;
+			&:not(:last-child):after {
+				left: 5%;
+			}
+		}
+		.num, .title {
+			display: flex;
+			// flex-direction: column;
+			align-items: center;
+			height: auto;
+		}
+		.num {
+			justify-content: center;
+			width: 10%;
+		}
+		.title {
+			width: 40%;
+			
+			padding: 10px 20px;
+		}
+		.text {
+			width: 50%;
+			padding: 10px 20px;
+			
+		}
+	}
+}
+  
+/* 1280px〜：大型PC
+------------------------------ */
+@media screen and (min-width:1280px) {
+}

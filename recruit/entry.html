@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>エントリーシート | 株式会社クーピー 採用サイト</title>
+	<link rel="stylesheet" href="./css/bootstrap.css">
+	<link rel="stylesheet" href="./css/style.css">
+	<link rel="shortcut icon" href="./css/favicon/favicon.ico" type="image/x-icon">
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-JD2DMD95F2"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+		gtag('config', 'G-JD2DMD95F2');
+	</script>
+</head>
+
+<body>
+	<!-- header -->
+	<header>
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="logo_wrap"><a href="./" class="logo"><img src="./img/coopii_logo.gif"
+							alt="CooPii System development"></a></div>
+				<div class="text_wrap">
+					<p class="mb-0 fst-italic logo_text">Recruiting Information<br><span class="ib">新卒・未経験・</span><span class="ib">キャリア採用サイト</span></p>
+				</div>
+				<div class="nav_wrap hNav" id="mNav">
+					<nav>
+						<ul class="nav">
+							<li class="nav-item">
+								<a class="nav-link" href="./">TOP</a>
+							</li>
+							<li class="nav-item active">
+								<a class="nav-link" href="./company.html" aria-current="page">会社概要</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="./business.html">事業を知る</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="./keyword.html">気になるキーワード</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="./recruit.html">募集要項</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="./entry.html">エントリー</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- header end -->
+
+	<!-- メインコンテンツ -->
+	<div class="banner_box">
+		<div class="container">
+			<h2>エントリーシート</h2>
+		</div>
+	</div>
+	<main class="container">
+		<div class="entry_wrap">
+			<div class="entry_box inner_content">
+				<iframe id="entry" src="http://192.168.1.23/test.js/" frameborder="0" style="width: 100%;"></iframe>
+				<script>
+					window.addEventListener('message', function (e) {
+						var iframe = document.getElementById("entry");
+						var eventName = e.data[0];
+						var data = e.data[1];
+						switch (eventName) {
+							case 'setHeight':
+								iframe.style.height = data + "px";
+								break;
+						}
+					}, false);
+
+				</script>
+			</div>
+		</div>
+		<!-- <div class="entry_box inner_content">
+			<a href="./entry.html">Entry | 応募する</a>
+		</div> -->
+	</main>
+	<!-- メインコンテンツ end -->
+
+	<!-- footer -->
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="logo col"><img src="./img/coopii_logo.gif" alt="CooPii System development"></div>
+				<div class="col-7">
+					<p class="mb-0 fst-italic logo_text">Recruiting Information<br><span>新卒・未経験・キャリア採用サイト</span></p>
+				</div>
+				<div class="col">
+					<img src="./img/youth_yell.png" alt="">
+				</div>
+			</div>
+			<div class="nav_box">
+				<div class="comp_box"><a href="../" target="_blank" rel="noopener noreferrer"><span>&raquo;</span>
+						コーポレートサイトはこちら</a></div>
+				<nav class="fNav">
+					<ul class="nav justify-content-md-center">
+						<li class="nav-item">
+							<a class="nav-link" href="./company.html">会社概要</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="./business.html">事業を知る</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="./keyword.html">気になるキーワード</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="./recruit.html">募集要項</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="./entry.html">エントリー</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<p class="text-center mt-2"><small>&copy; CooPii. All Rights Reserved.</small></p>
+		</div>
+	</footer>
+	<!-- footer end -->
+
+	<!-- TOPに戻る -->
+	<div class="pagetop"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+			class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+			<path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+		</svg></div>
+	<!-- TOPに戻る end -->
+
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="./js/smoothscroll.min.js"></script>
+	<script src="./js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+@import '_include.scss';
+$headline: #ccf;
+
+.graph_box {
+	.fxws{
+		display: flex;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+	}
+	.box {
+		width: 49%;
+		padding: 10px;
+		border: 1px solid #000;
+		margin-bottom: 20px;
+	}
+	.title {
+		text-align: center;
+	}
+	.img {
+		background-color: #ddd;
+	}
+	.result {
+		text-align: center;
+		margin-bottom: 0;
+		font-weight: bold;
+		font-size: 14px;
+		.big {
+			font-size: 24px;
+			margin: 0 5px;
+		}
+	}
+}
+
+.accreditation_box {
+	.headline {
+		background-color: $headline;
+	}
+	
+}
+
+
+/* 〜768px：スマホ && 縦向き
+---------------------------- */
+@media screen and (max-width:768px) and (orientation: portrait) {
+	.graph_box {
+		.box {
+			&:nth-child(odd) {
+				margin-right: 2%;
+			}
+		}
+	}
+	.accreditation_box {
+		.img {
+			float: left;
+			margin-right: 10px;
+		}
+	}
+
+}
+
+/* 768px〜：タブレット
+------------------------------ */
+@media screen and (min-width:768px) {
+	.catch_box {
+		.text {
+			padding: 0 20px;
+		}
+	}
+	.graph_box {
+		.box {
+			width: 32%;
+			&:not(:nth-child(3n)) {
+				margin-right: 2%;
+			}
+		}
+	}
+	.accreditation_box {
+		.fxwb {
+			display: flex;
+			justify-content: space-between;
+		}
+		.img {
+			width: 11%;
+		}
+		.text_box {
+			width: 85%;
+		}
+	}
+}
+  
+/* 1280px〜：大型PC
+------------------------------ */
+@media screen and (min-width:1280px) {
+}

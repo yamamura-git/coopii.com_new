@@ -1,0 +1,50 @@
+@import "_include";
+
+.company_box {
+	.fxwb {
+		border-bottom: 1px solid #000;
+	}
+	.img {margin-top: 10px;}
+}
+
+/* 〜768px：スマホ && 縦向き
+---------------------------- */
+@media screen and (max-width:768px) and (orientation: portrait) {
+	.company_box {
+		.fxwb {
+			padding: 0 10px;
+		}
+		dd {
+			padding: 0 1rem;
+		}
+		iframe {
+			height: 40vh;
+		}
+	}
+}
+
+/* 768px〜：タブレット
+------------------------------ */
+@media screen and (min-width:768px) {
+	.company_box {
+		max-width: 750px;
+		.fxwb {
+			display: flex;	
+			padding: 0 10px 10px 20px;
+		}
+		dt {
+			width: 26%;
+		}
+		dd {
+			width: 74%;
+		}
+		iframe {
+			height: 190px;
+		}
+	}
+}
+  
+/* 1280px〜：大型PC
+------------------------------ */
+@media screen and (min-width:1280px) {
+}

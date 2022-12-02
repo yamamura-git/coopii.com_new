@@ -1,0 +1,33 @@
+$base_color: #00a0c6;
+$base2_color: #006;
+$accent_color: #0c9;
+$hover_color: #0f9;
+$hover2_color: #099;
+$title_color: #09f;
+$title2_color: #039;
+$h3_color: #906;
+$text_color: #666;
+$bg_color: #f0f0ff;
+$nav_hover_color: #003;
+
+@mixin headLine {
+	border-image: linear-gradient(to right, $base_color 50%, $base2_color 100%);
+	border-image-slice: 1;
+}
+	
+
+/* 〜768px：スマホ && 縦向き
+---------------------------- */
+@media screen and (max-width:768px) and (orientation: portrait) {
+
+}
+
+/* 768px〜：タブレット
+------------------------------ */
+@media screen and (min-width:768px) {
+}
+  
+/* 1280px〜：大型PC
+------------------------------ */
+@media screen and (min-width:1280px) {
+}
