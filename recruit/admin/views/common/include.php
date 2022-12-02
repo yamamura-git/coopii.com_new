@@ -29,9 +29,9 @@ function h($string)
 	return htmlspecialchars($string, ENT_QUOTES, 'utf-8');
 }
 
-/**
+/************************************
  *  メール送信
- */
+ ************************************/
 $smtp_server = "ssl://smtp.lolipop.jp";	// SMTPサーバー
 $smtp_port = 465;	// SMTPポート番号
 $mailaddress = "yamamura@coopii.com";	// SMTPサーバーのユーザ名

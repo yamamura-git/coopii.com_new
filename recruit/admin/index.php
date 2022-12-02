@@ -17,7 +17,7 @@ if (isset($_POST['change'])) { // 新着情報表示数変更
 	header('Location: ' . $admin_url);
 }
 if (isset($_GET['logout'])) { // ログアウト処理
-	session_destroy();
+	unset($_SESSION['user']);
 	header('Location: ' . $admin_url . '/login');
 	return;
 }
