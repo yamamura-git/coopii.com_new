@@ -15,6 +15,17 @@ $entry_page = true;
 
 $views = "form.php";
 
+//アップロードを許可する拡張子
+$cfg['ALLOW_EXTS'] = array('pdf', 'xlsx', 'docx');
+
+function checkExt($filedata)
+{ //アップロードされたファイル名の拡張子が許可されているか確認する関数
+	global $cfg;
+	$getext = pathinfo($filedata, PATHINFO_EXTENSION);
+	$ext = strtolower($getext($filedata));
+	return in_array($ext, $cfg['ALLOW_EXTS']);
+}
+
 //クリックジャッキング対策
 header('X-FRAME-OPTIONS: SAMEORIGIN');
 
@@ -51,11 +62,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	}
 	if ($filename == "") {
 		$error['resume'] = '*履歴書は必須項目です。';
+	} else {
+		foreach ($_FILES['file']['tmp_name'] as $no => $tmp_name) {
+			$filedata = $_FILES['file']['name'][$no];
+			//ファイルの拡張子をチェック
+			if (!(checkExt($filename))) {
+				echo $filename.'はアップロードできません<br>';
+			}
+		}
 	}
 
 
 	if (empty($error)) {
-		if (CSRF::validate($_POST)) {// トークンを確認
+		if (CSRF::validate($_POST)) { // トークンを確認
 			mailto($name, $email, $location, $apply_type, $message, $tempfile, $filename, $smtp_server, $mailaddress, $mail_password, $smtp_port, $send_name, $applicant_subject, $applicant_mail_body, $signature, $company_subject, $company_mail_body);
 			session_destroy();
 			header('Location: ' . $host_url . '/entry/thx');
@@ -87,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					<label for="name" class="col-sm-3 col-form-label required">氏名</label>
 					<div class="col-sm-9">
 						<input type="text" class="form-control" name="name" id="name" aria-describedby="err_name" required>
-						<?php if (isset($error['name'])) echo'<div id="err_name" class="invalid-feedback d-block">'. h($error['name']) .'</div>'?>
+						<?php if (isset($error['name'])) echo '<div id="err_name" class="invalid-feedback d-block">' . h($error['name']) . '</div>' ?>
 					</div>
 				</div>
 				<!-- <div class="mb-4 row">
@@ -155,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 							<input class="form-check-input" type="radio" name="location" id="other" value="不問" required>
 							<label class="form-check-label" for="other">不問</label>
 						</div>
-						<?php if (isset($error['location'])) echo'<div id="err_location" class="invalid-feedback d-block">'. h($error['location']) .'</div>'?>
+						<?php if (isset($error['location'])) echo '<div id="err_location" class="invalid-feedback d-block">' . h($error['location']) . '</div>' ?>
 					</div>
 				</div>
 				<div class="mb-4 row">
@@ -173,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 							<input class="form-check-input" type="radio" name="apply_type" id="career_recruitment" value="キャリア採用" required>
 							<label class="form-check-label" for="career_recruitment">キャリア採用</label>
 						</div>
-						<?php if (isset($error['apply_type'])) echo'<div id="err_apply_type" class="invalid-feedback d-block">'. h($error['apply_type']) .'</div>'?>
+						<?php if (isset($error['apply_type'])) echo '<div id="err_apply_type" class="invalid-feedback d-block">' . h($error['apply_type']) . '</div>' ?>
 					</div>
 				</div>
 				<div class="mb-4 row">
@@ -248,6 +267,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 						<textarea class="form-control" id="message" name="message" rows="3"></textarea>
 					</div>
 				</div>
+				<div class="form-check text-center mb-4">
+					<input class="form-check-input float-none" type="checkbox" value="" id="check">
+					<label class="form-check-label" for="check">
+						<button type="button" class="btn-link align-baseline" data-bs-toggle="modal" data-bs-target="#cautionModal">規約事項</button>の内容に同意します
+					</label>
+				</div>
 				<div class="row justify-content-center">
 					<button type="submit" class="btn btn-primary col-2">送信</button>
 				</div>
@@ -257,6 +282,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	</main>
 
 	<?php include '../views/footer.php' ?>
+
+	<!-- 規約事項Modal -->
+	<div class="modal fade" id="cautionModal" tabindex="-1" aria-labelledby="cautionLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="cautionLabel">規約事項</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					規約事項について～～～～
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 規約事項Modal end -->
+
 	<!-- TOPに戻る -->
 	<div class="pagetop"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
 			<path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />

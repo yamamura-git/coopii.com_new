@@ -33,7 +33,7 @@ function mailto($name, $email, $location, $apply_type, $message, $tempfile, $fil
 		$applicant_mail->isSMTP();   // SMTPの使用宣言
 		$applicant_mail->Host       = $smtp_server;	// SMTPサーバーを指定
 		$applicant_mail->SMTPAuth   = true;			// SMTP authenticationを有効化
-		$applicant_mail->Username   = $mailaddress;   // SMTPサーバーのユーザ名
+		$applicant_mail->Username   = $mailaddress;	// SMTPサーバーのユーザ名
 		$applicant_mail->Password   = $mail_password;	// SMTPサーバーのパスワード
 		$applicant_mail->SMTPSecure = 'tls';	// 暗号化を有効（tls or ssl）無効の場合はfalse
 		$applicant_mail->Port       = $smtp_port;		// TCPポートを指定（tlsの場合は465や587）

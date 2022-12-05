@@ -29,12 +29,6 @@ function h($string)
 	return htmlspecialchars($string, ENT_QUOTES, 'utf-8');
 }
 
-function remain($var) {
-	if(is_array($var)){
-		return array_map('remain', $var);
-	}
-}
-
 /************************************
  *  メール送信
  ************************************/
