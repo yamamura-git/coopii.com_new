@@ -1,30 +1,25 @@
 <?php
-session_start();
 require_once('../admin/views/common/include.php');
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
+
 require '../admin/vendor/autoload.php';
 
-//tokenを変数に入れる
-$token = $_SESSION['token'];
-
-// トークンを確認し、確認画面を表示
-if(!(hash_equals($token, $_SESSION['token']) && !empty($token))) {
-    echo "不正アクセスの可能性があります";
-    exit();
-}
-
-if (isset($_POST['submit'])) {
+// if (isset($_POST['submit'])) {
+function mailto($name, $email, $location, $apply_type, $message, $tempfile, $filename, $smtp_server, $mailaddress, $mail_password, $smtp_port, $send_name, $applicant_subject, $applicant_mail_body, $signature, $company_subject, $company_mail_body)
+{
 	// メール本文に入れるフォーム内容
-	$mailbody = "-----------------------------------". " \r\n";
-	$mailbody .= "【氏名】". $name. " \r\n";
-	$mailbody .= "【メールアドレス】". $email. " \r\n";
-	$mailbody .= "【希望勤務地】". $location. " \r\n";
-	$mailbody .= "【履歴書】". $filename. " \r\n";
-	$mailbody .= "【質問／メッセージ】". $message. " \r\n";
-	$mailbody .= "-----------------------------------";
-	
+	$mailbody = "-----------------------------------" . " \r\n";
+	$mailbody .= "【氏名】" . $name . " \r\n";
+	$mailbody .= "【メールアドレス】" . $email . " \r\n";
+	$mailbody .= "【希望勤務地】" . $location . " \r\n";
+	$mailbody .= "【応募種別】" . $apply_type . " \r\n";
+	$mailbody .= "【履歴書】" . $filename . " \r\n";
+	$mailbody .= "【質問／メッセージ】" . $message . " \r\n";
+	$mailbody .= "-----------------------------------" . " \r\n";
+
 	try {
 		/****************  応募者用  ****************/
 		$applicant_mail = new PHPMailer(true); // インスタンスを生成（true指定で例外を有効化）
@@ -51,8 +46,8 @@ if (isset($_POST['submit'])) {
 
 		// 送信内容設定
 		$applicant_mail->Subject = $applicant_subject;
-		$applicant_mail->addAttachment($tempfile,$filename);
-		$applicant_mail->Body    = $applicant_mail_body."\n".$mailbody."\n".$signature;
+		$applicant_mail->addAttachment($tempfile, $filename);
+		$applicant_mail->Body    = $applicant_mail_body . "\n" . $mailbody . "\n" . $signature;
 
 		/****************  自社用  ****************/
 		$company_mail = new PHPMailer(true);
@@ -61,7 +56,7 @@ if (isset($_POST['submit'])) {
 		// SMTPサーバの設定
 		$company_mail->isSMTP();
 		$company_mail->Host       = $smtp_server;
-		$company_mail->SMTPAuth   = true;	
+		$company_mail->SMTPAuth   = true;
 		$company_mail->Username   = $mailaddress;
 		$company_mail->Password   = $mail_password;
 		$company_mail->SMTPSecure = 'tls';
@@ -74,26 +69,23 @@ if (isset($_POST['submit'])) {
 
 		// 送信内容設定
 		$company_mail->Subject = $company_subject;
-		$company_mail->addAttachment($tempfile,$filename);
-		$company_mail->Body    = $company_mail_body."\n".$mailbody."\n".$signature;
+		$company_mail->addAttachment($tempfile, $filename);
+		$company_mail->Body    = $company_mail_body . "\n" . $mailbody . "\n" . $signature;
 
 
 		/****************  送信  ****************/
-		// $applicant_mail->send();
-		// $company_mail->send();
+		$applicant_mail->send();
+		$company_mail->send();
 
-		echo "name:".$name."<br>";
-		echo $email."<br>";
-		echo $location."<br>";
-		echo $resume."<br>";
-		echo $tempfile."<br>";
-		echo $filename."<br>";
-		echo $message;
-
-		header('Location: ' . $host_url.'/entry/thx');
+		// echo "name: ".$name."<br>";
+		// echo "email: ".$email."<br>";
+		// echo $location."<br>";
+		// echo $resume."<br>";
+		// echo $tempfile."<br>";
+		// echo $filename."<br>";
+		// echo $message;
 	} catch (Exception $e) { // エラーの場合
-		echo "Message could not be sent. Mailer Error: {$applicant_mail->ErrorInfo}";
-		echo "Message could not be sent. Mailer Error: {$company_mail->ErrorInfo}";
+		echo "メッセージを送信できませんでした。メールエラー:{$applicant_mail->ErrorInfo}";
+		// echo "Message could not be sent. Mailer Error: {$company_mail->ErrorInfo}";
 	}
-
 }

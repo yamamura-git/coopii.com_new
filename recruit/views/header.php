@@ -25,7 +25,7 @@
 							<a class="nav-link" href="<?php echo $host_url ?>/recruit.html">募集要項</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link<?=$entry_page ? ' active" aria-current="page':''?>" href="<?php echo $host_url ?>/entry.html">エントリー</a>
+							<a class="nav-link<?=$entry_page ? ' active" aria-current="page':''?>" href="<?php echo $host_url ?>/entry/">エントリー</a>
 						</li>
 					</ul>
 				</nav>
